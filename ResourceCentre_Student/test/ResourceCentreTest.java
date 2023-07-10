@@ -71,7 +71,7 @@ public class ResourceCentreTest {
 		assertEquals("Test that the Chromebook arraylist is empty.", 0, chromebookList.size());
 		//Given an empty list, after adding 1 item, the size of the list is 1
 		ResourceCentre.addChromebook(chromebookList, cb1);
-		assertEquals("Test that the Chromeboo arraylist size is 1.", 1, chromebookList.size());
+		assertEquals("Test that the Chromebook arraylist size is 1.", 1, chromebookList.size());
 		// Add an item
 		ResourceCentre.addChromebook(chromebookList, cb2);
 		assertSame("Test that Chromebook is added to the end of the list.", cb2, chromebookList.get(1));
