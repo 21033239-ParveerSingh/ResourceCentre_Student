@@ -20,3 +20,4 @@ private int opticalZoom;
 
 //test
 
+//test2
