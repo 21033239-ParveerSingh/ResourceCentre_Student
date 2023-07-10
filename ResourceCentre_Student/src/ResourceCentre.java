@@ -148,7 +148,12 @@ public class ResourceCentre {
 	}
 
 	public static String retrieveAllChromebook(ArrayList<Chromebook> chromebookList) {
-		String output = "";
+		String output = String.format("%-10s %-30s %-15s\n", "ASSET TAG", "DESCRIPTION", "OPERATING SYSTEM");
+		
+		for(int i = 0; i < chromebookList.size(); i++) {
+			output += String.format("%-10s %-30s %-15s\n", chromebookList.get(i).getAssetTag(),
+					chromebookList.get(i).getDescription(), chromebookList.get(i).getOs());
+		}
 		// write your code here
 		return output;
 	}
@@ -191,6 +196,7 @@ public class ResourceCentre {
 	}	
 	public static void addChromebook(ArrayList<Chromebook> chromebookList, Chromebook cb) {
 		// write your code here
+		chromebookList.add(cb);
 	}
 	
 	//================================= Option 3 Loan an item (CRUD - Update) =================================
@@ -227,7 +233,19 @@ public class ResourceCentre {
 	
 	public static boolean doLoanChromebook(ArrayList<Chromebook> chromebookList, String tag, String dueDate) {
 		// write your code here
-		return true;
+		boolean isLoaned = false;
+		if(tag.isEmpty() || dueDate.isEmpty())
+			return false;
+		for(int i = 0; i < chromebookList.size(); i++) {
+			if(tag.equalsIgnoreCase(chromebookList.get(i).getAssetTag())
+					&& chromebookList.get(i).getIsAvailable() == true) {
+				chromebookList.get(i).setIsAvailable(false);
+				chromebookList.get(i).setDueDate(dueDate);
+				
+				isLoaned = true;
+			}
+		}
+		return isLoaned;
 	}
 	public static void loanChromebook(ArrayList<Chromebook> chromebookList) {
 		// write your code here		
@@ -266,6 +284,16 @@ public class ResourceCentre {
 
 	public static boolean doReturnChromebook(ArrayList<Chromebook> chromebookList,String tag){
 		boolean isReturned = false;
+		if(tag.isEmpty())
+			return false;
+		for(int i = 0; i < chromebookList.size(); i++) {
+			if(tag.equalsIgnoreCase(chromebookList.get(i).getAssetTag())
+					&& chromebookList.get(i).getIsAvailable() == false) {
+				chromebookList.get(i).setIsAvailable(true);
+				chromebookList.get(i).setDueDate("");
+				isReturned = true;
+			}
+		}
 		// write your code here
 		return isReturned;
 	}
